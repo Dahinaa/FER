@@ -18,6 +18,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeCap
 
 private val azulFER = Color(0xFF172958)
 private val grisSeleccion = Color(0xFFD5D5D5)
@@ -99,13 +102,44 @@ fun PreferenciasScreen(
                 }
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "→",
-                        fontSize = 23.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
+                    Canvas(modifier = Modifier.size(26.dp)) {
+                        val centroY = size.height / 2f
+                        val puntaX = size.width * 0.8f
+                        val grosor = 2.5.dp.toPx()
+                        val largo = size.width * 0.28f
+
+                        drawLine(
+                            color = Color.White,
+                            start = Offset(size.width * 0.2f, centroY),
+                            end = Offset(puntaX, centroY),
+                            strokeWidth = grosor,
+                            cap = StrokeCap.Round
+                        )
+
+                        drawLine(
+                            color = Color.White,
+                            start = Offset(
+                                puntaX - largo,
+                                size.height * 0.25f
+                            ),
+                            end = Offset(puntaX, centroY),
+                            strokeWidth = grosor,
+                            cap = StrokeCap.Round
+                        )
+
+                        drawLine(
+                            color = Color.White,
+                            start = Offset(puntaX, centroY),
+                            end = Offset(
+                                puntaX - largo,
+                                size.height * 0.75f
+                            ),
+                            strokeWidth = grosor,
+                            cap = StrokeCap.Round
+                        )
+                    }
                 }
+
             }
         }
     }
@@ -180,3 +214,4 @@ private fun OpcionFER(
         )
     }
 }
+
